@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Mentor Dashboard | MentorConnect</title>
+  <style>
+    body {
+        font-family: Arial, sans-serif;
+        background: #f0f4f8;
+        padding: 30px;
+        margin: 0;
+    }
+
+    .dashboard-container {
+        max-width: 700px;
+        background: white;
+        padding: 25px;
+        margin: auto;
+        border-radius: 8px;
+        box-shadow: 0 0 10px rgba(0,0,0,0.1);
+    }
+
+    h2, h3 {
+         text-align: center;
+    }
+
+    form input,
+    form textarea {
+        width: 100%;
+        padding: 10px;
+        margin-top: 10px;
+        border: 1px solid #ccc;
+        border-radius: 6px;
+    }
+
+    textarea {
+        resize: vertical;
+    }
+
+    button {
+        margin-top: 15px;
+        padding: 10px 15px;
+        background-color: #007acc;
+        color: white;
+        border: none;
+        border-radius: 6px;
+        cursor: pointer;
+        display: block;
+        width: 100%;
+    }
+
+    button:hover {
+         background-color: #005f99;
+    }
+
+    .profile-summary {
+    margin-top: 20px;
+    background: #f9f9f9;
+    padding: 15px;
+    border-radius: 6px;
+    }
+
+  </style>
+</head>
+<body>
+  <div class="dashboard-container">
+    <h2>Mentor Dashboard</h2>
+    <form id="mentorForm">
+      <input type="text" placeholder="Full Name" id="mentorName" required>
+      <input type="text" placeholder="Expertise (e.g., Web Dev, AI)" id="mentorExpertise" required>
+      <input type="text" placeholder="Experience (e.g., 5 years)" id="mentorExperience" required>
+      <input type="text" placeholder="Skills (comma-separated)" id="mentorSkills">
+      <input type="text" placeholder="Certificates" id="mentorCertificates">
+      <textarea placeholder="Reviews" id="mentorReviews"></textarea>
+      <input type="text" placeholder="Available Time Slots" id="mentorSchedule">
+      <input type="text" placeholder="Connections (Student Names)" id="mentorConnections">
+      <button type="submit">Save</button>
+    </form>
+    <button onclick="goToHome()">Go to Home</button>
+    <div id="mentorSummary"></div>
+  </div>
+
+  <script>
+    document.getElementById("mentorForm").addEventListener("submit", function (e) {
+      e.preventDefault();
+      const name = document.getElementById("mentorName").value;
+      const expertise = document.getElementById("mentorExpertise").value;
+      const experience = document.getElementById("mentorExperience").value;
+      const skills = document.getElementById("mentorSkills").value;
+      const certificates = document.getElementById("mentorCertificates").value;
+      const reviews = document.getElementById("mentorReviews").value;
+      const schedule = document.getElementById("mentorSchedule").value;
+      const connections = document.getElementById("mentorConnections").value;
+
+      document.getElementById("mentorSummary").innerHTML = `
+        <h3>Your Profile</h3>
+        <p><strong>Name:</strong> ${name}</p>
+        <p><strong>Expertise:</strong> ${expertise}</p>
+        <p><strong>Experience:</strong> ${experience}</p>
+        <p><strong>Skills:</strong> ${skills}</p>
+        <p><strong>Certificates:</strong> ${certificates}</p>
+        <p><strong>Reviews:</strong> ${reviews}</p>
+        <p><strong>Available Time Slots:</strong> ${schedule}</p>
+        <p><strong>Connections:</strong> ${connections}</p>
+      `;
+    });
+
+    function goToHome() {
+      window.location.href = "home.html";
+    }
+  </script>
+</body>
+</html>

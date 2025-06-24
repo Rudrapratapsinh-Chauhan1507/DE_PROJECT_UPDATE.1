@@ -1,0 +1,139 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Find Mentor</title>
+    <link rel="stylesheet" href="home.css">
+    <style>
+        .notification-container {
+        max-width: 700px;
+        margin: 40px auto;
+        background: white;
+        padding: 20px;
+        border-radius: 6px;
+        box-shadow: 0px 0px 10px rgba(0,0,0,0.1);
+        }
+
+        .notification-container h2 {
+        margin-bottom: 20px;
+        color: #004080;
+        }
+
+        #notificationList {
+        list-style: none;
+        padding: 0;
+        }
+
+        .notification-item {
+        padding: 15px;
+        margin-bottom: 10px;
+        background-color: #eef3f8;
+        border-left: 5px solid #004080;
+        border-radius: 4px;
+        transition: background-color 0.3s ease;
+        }
+
+        .notification-item:hover {
+        background-color: #dde6f0;
+        }
+
+        .notification-item strong {
+        color: #002752;
+        }
+    </style>
+</head>
+<body>
+    <nav class="navbar">
+        <div class="logo">MentorConnect</div>
+        <ul class="nav-links">
+            <li><a href="home.html">Home</a></li>
+            <li><a href="network.html">My Network</a></li>
+            <li><a href="mentor.html">Find Mentor</a></li>
+            <li><a href="message.html">Messaging</a></li>
+            <li><a href="notification.html" class="active">Notifications</a></li>
+            <li><a href="meeting.html">Join Meeting</a></li>
+        </ul>
+    </nav>
+
+    <div class="notification-container">
+        <h2 style="text-align: center;">Notifications</h2>
+        <ul id="notificationList"></ul>
+    </div>
+
+    <footer class="myfooter" style="display: flex; text-align: center; background-color: #0073e6; color: white;">
+        <aside style="width: 25%; ">
+            <div style="height: 250px; font-size: 20px;">
+                <h2>Pages</h2>
+                <ul class="navbar-links" style="font-size: 20px;">
+                    <a href="home.html" style="text-decoration: none; color: white; padding-right: 40px;">Home</a><br>
+                    <a href="network.html" id="my-network" style="text-decoration: none; color: white; padding-right: 40px;">My Network</a><br>
+                    <a href="mentor.html" id="find-mentor" style="text-decoration: none; color: white; padding-right: 40px;">Find Mentor</a><br>
+                    <a href="message.html" id="messaging-link" style="text-decoration: none; color: white; padding-right: 40px;">Messaging</a><br>
+                    <a href="notification.html" id="notification-link" style="text-decoration: none; color: white; padding-right: 40px;">Notifications</a><br>
+                    <a href="meeting.html" id="meeting-link" style="text-decoration: none; color: white; padding-right: 40px;">Join Meeting</a><br>
+                </ul>
+            </div>
+        </aside>
+
+        <main style="width: 50%;">
+            <div style="height: 160px; font-size: 20px">
+                <h2>Contact</h2>
+                <p>support@gmail.com</p>
+                <p>+91 9898989898</p>
+            </div>
+        </main>
+
+        <aside style="width: 25%;">
+            <div style="height: 160px; font-size: 20px">
+                <h2>Follow Us</h2>
+                <i class="fa-brands fa-instagram"></i>
+                <i class="fa-brands fa-x-twitter"></i>
+                <i class="fa-brands fa-square-facebook"></i>
+                <i class="fa-brands fa-linkedin"></i>
+            </div>
+        </aside>
+    </footer>
+
+    <script>
+        const notifications = [
+            {
+                type: "connection",
+                message: "Divya Patel sent you a connection request.",
+                time: "2 mins ago"
+            },
+            {
+                type: "message",
+                message: "You received a new message from Karthik Applla.",
+                time: "10 mins ago"
+            },
+            {
+                type: "appointment",
+                message: "Javed Khan accepted your appointment request.",
+                time: "1 hour ago"
+            },
+            {
+                type: "reminder",
+                message: "Reminder: You have a meeting with Nidhi Modi tomorrow at 4 PM.",
+                time: "2 hours ago"
+            },
+            {
+                type: "system",
+                message: "New feature update: You can now follow mentors!",
+                time: "1 day ago"
+            }
+            ];
+
+        const notificationList = document.getElementById("notificationList");
+
+        notifications.forEach(notification => {
+        const item = document.createElement("li");
+        item.classList.add("notification-item");
+        item.innerHTML = `<strong>${notification.type.toUpperCase()}:</strong> ${notification.message} <br><small>${notification.time}</small>`;
+        notificationList.appendChild(item);
+        });
+
+    </script>
+</body>
+</html>
+

@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Video Call</title>
+    <link rel="stylesheet" href="home.css">
+    <script src="https://unpkg.com/peerjs@1.3.1/dist/peerjs.min.js"></script>
+</head>
+<body class="videobody">
+    <div class="videocontainer">
+        <h2>Your ID: <span id="my-id">Generating...</span></h2>
+
+        <div class="email-share">
+            <input type="email" id="email-recipient" placeholder="Enter recipient's email">
+            <button id="send-email">Send ID via Email</button>
+        </div>
+
+        <div class="video-container">
+            <video id="my-video" autoplay muted></video>
+            <video id="peer-video" autoplay></video>
+        </div>
+
+        <input type="text" id="peer-id" placeholder="Enter Sender's Peer ID">
+        <button id="connect-btn">Accept & Connect</button>
+        <a id="connect-link" style="display:none; margin-top: 10px; color: blue; text-decoration: underline; cursor: pointer;">Click here to connect now</a>
+
+        <div class="call-controls">
+            <button id="end-call-btn">❌</button>
+            <button id="mute-btn">🔇</button>
+        </div>
+    </div>
+
+    <script>
+        const peer = new Peer();
+
+        const myVideo = document.getElementById("my-video");
+        const peerVideo = document.getElementById("peer-video");
+        const peerIdInput = document.getElementById("peer-id");
+        const connectBtn = document.getElementById("connect-btn");
+        const endCallBtn = document.getElementById("end-call-btn");
+        const muteBtn = document.getElementById("mute-btn");
+        const emailBtn = document.getElementById("send-email");
+        const emailInput = document.getElementById("email-recipient");
+        const connectLink = document.getElementById("connect-link");
+
+        let myStream;
+        let currentCall;
+        let isMuted = false;
+        let myPeerId = "";
+
+        navigator.mediaDevices.getUserMedia({ video: true, audio: true }).then(stream => {
+            myVideo.srcObject = stream;
+            myStream = stream;
+        });
+
+        peer.on("open", id => {
+            document.getElementById("my-id").textContent = id;
+            myPeerId = id;
+        });
+
+        peer.on("call", call => {
+            call.answer(myStream);
+            call.on("stream", userStream => {
+                peerVideo.srcObject = userStream;
+            });
+            currentCall = call;
+        });
+
+        connectBtn.addEventListener("click", () => {
+            const peerId = peerIdInput.value.trim();
+            if (!peerId) return alert("Please enter a valid Peer ID to connect.");
+
+            connectLink.style.display = "block";
+            connectLink.textContent = `Click here to connect to ${peerId}`;
+            connectLink.onclick = () => {
+                const call = peer.call(peerId, myStream);
+                call.on("stream", userStream => {
+                    peerVideo.srcObject = userStream;
+                });
+                currentCall = call;
+            };
+        });
+
+        endCallBtn.addEventListener("click", () => {
+            if (currentCall) {
+                currentCall.close();
+                peerVideo.srcObject = null;
+            }
+        });
+
+        muteBtn.addEventListener("click", () => {
+            isMuted = !isMuted;
+            myStream.getAudioTracks()[0].enabled = !isMuted;
+            muteBtn.textContent = isMuted ? "🔊" : "🔇";
+        });
+
+        emailBtn.addEventListener("click", () => {
+            const recipient = emailInput.value.trim();
+            if (!recipient || !recipient.includes("@")) {
+                alert("Please enter a valid email address.");
+                return;
+            }
+
+            const subject = encodeURIComponent("Join my PeerJS video call");
+            const body = encodeURIComponent(`Hi, please connect with me on MentorConnect using this Peer ID: ${myPeerId}`);
+            const mailtoLink = `mailto:${recipient}?subject=${subject}&body=${body}`;
+
+            window.location.href = mailtoLink;
+        });
+    </script>
+</body>
+</html>

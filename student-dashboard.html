@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Student Dashboard | MentorConnect</title>
+  <style>
+    body {
+        font-family: Arial, sans-serif;
+        background: #f0f4f8;
+        padding: 30px;
+        margin: 0;
+    }
+    
+    .dashboard-container {
+        max-width: 700px;
+        background: white;
+        padding: 25px;
+        margin: auto;
+        border-radius: 8px;
+        box-shadow: 0 0 10px rgba(0,0,0,0.1);
+    }
+    
+    h2, h3 {
+        text-align: center;
+    }
+    
+    form input, form textarea {
+        width: 100%;
+        padding: 10px;
+        margin-top: 10px;
+        border: 1px solid #ccc;
+        border-radius: 6px;
+    }
+    
+    textarea {
+        resize: vertical;
+    }
+    
+    button {
+        margin-top: 15px;
+        padding: 10px 15px;
+        background-color: #007acc;
+        color: white;
+        border: none;
+        border-radius: 6px;
+        cursor: pointer;
+        display: block;
+        width: 100%;
+    }
+    
+    button:hover {
+        background-color: #005f99;
+    }
+    
+    #studentSummary, #mentorSummary {
+        margin-top: 20px;
+        background: #f9f9f9;
+        padding: 15px;
+        border-radius: 6px;
+    }
+  </style>
+</head>
+<body>
+  <div class="dashboard-container">
+    <h2>Student Dashboard</h2>
+    <form id="studentForm">
+      <input type="text" placeholder="Full Name" id="studentName" required>
+      <input type="text" placeholder="Branch" id="studentBranch" required>
+      <input type="text" placeholder="Course" id="studentCourse" required>
+      <input type="text" placeholder="Skills (comma-separated)" id="studentSkills">
+      <input type="text" placeholder="Certificates" id="studentCertificates">
+      <textarea placeholder="Reviews" id="studentReviews"></textarea>
+      <input type="text" placeholder="Available Schedule" id="studentSchedule">
+      <input type="text" placeholder="Connections (Names)" id="studentConnections">
+      <button type="submit">Save</button>
+    </form>
+    <button onclick="goToHome()">Go to Home</button>
+    <div id="studentSummary"></div>
+  </div>
+
+  <script>
+    document.getElementById("studentForm").addEventListener("submit", function (e) {
+      e.preventDefault();
+      const name = document.getElementById("studentName").value;
+      const branch = document.getElementById("studentBranch").value;
+      const course = document.getElementById("studentCourse").value;
+      const skills = document.getElementById("studentSkills").value;
+      const certificates = document.getElementById("studentCertificates").value;
+      const reviews = document.getElementById("studentReviews").value;
+      const schedule = document.getElementById("studentSchedule").value;
+      const connections = document.getElementById("studentConnections").value;
+
+      document.getElementById("studentSummary").innerHTML = `
+        <h3>Your Profile</h3>
+        <p><strong>Name:</strong> ${name}</p>
+        <p><strong>Branch:</strong> ${branch}</p>
+        <p><strong>Course:</strong> ${course}</p>
+        <p><strong>Skills:</strong> ${skills}</p>
+        <p><strong>Certificates:</strong> ${certificates}</p>
+        <p><strong>Reviews:</strong> ${reviews}</p>
+        <p><strong>Schedule:</strong> ${schedule}</p>
+        <p><strong>Connections:</strong> ${connections}</p>
+      `;
+    });
+
+    function goToHome() {
+      window.location.href = "home.html";
+    }
+  </script>
+</body>
+</html>

@@ -1,0 +1,146 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Home - MentorConnect</title>
+    <link rel="stylesheet" href="home.css" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css" integrity="sha512-Evv84Mr4kqVGRNSgIGL/F/aIDqQb7xQ2vcrdIwxfjThSH8CSR7PBEakCr51Ck+w+/U6swU2Im1vVX0SVk9ABhg==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+     <!-- <link rel="stylesheet" href="footer.css" /> -->
+</head>
+<body>
+    
+    <nav class="navbar">
+        <div class="logo">MentorConnect</div>
+        <ul class="nav-links">
+            <li href="home.html">Home</li>
+            <li href="network.html" id="my-network">My Network</li>
+            <li href="mentor.html" id="find-mentor">Find Mentor</li>
+            <li href="message.html" id="messaging-link">Messaging</li>
+            <li href="notification.html" id="notification-link">Notifications</li>
+            <li href="meeting.html" id="meeting-link">Join Meeting</li>
+        </ul>
+    </nav>
+
+    <div class="container">
+
+        <!--Profile Sidebar-->
+        <aside class="profile">
+            <img src="home_images/male.jpeg" alt="profile picture">
+            <h2>Rudrapratapsinh Chauhan</h2>
+            <p>Apollo Institute Of Engineering & Technology | Information Technology</p>
+            <p>Profile viewers : <strong>30</strong></p>
+            <p>Connections : <strong>60</strong></p>
+            <button class="connect-btn">Connect With Alumni</button>
+            <h3>Recent</h3>
+            <ul>
+                <li>Web developer</li>
+                <li>MERN Stack</li>
+                <li>Android Developer (JAVA)</li>
+            </ul>
+        </aside>
+
+        <!--Main Content-->
+        <main class="main-content">
+            
+             <div class="search-posts">
+                <input type="text" id="searchposts" placeholder="Search a post, try writing with">
+                <button class="search-btns">Media</button>
+                <button class="search-btns">Event</button>
+                <button class="search-btns">Article</button>
+             </div>
+
+            <div class="post">
+                <img src="home_images/Heenama'am.jpg" alt="profile picture" id="profile1">
+                <h3>Prof. Heena Patel</h3>
+                <p>Apollo Institute Of Engineering & Technology | Information Technology</p>
+                <p>Expert in Cryptography And Security</p>
+                <img src="home_images/HOD.webp" alt="Cloud Gaming Expert" id="profile2">
+                <div class="btn-container">
+                    <button class="btn like-btn" onclick="toggleLike(this)">❤️ Like</button>
+                    <button class="btn comment-btn" onclick="toggleCommentBox(this)">💬 Comment</button>
+                    <button class="btn repost-btn" onclick="repost()">🔄 Repost</button>
+                    <button class="btn send-btn" onclick="sendPost()">✉️ Send</button>
+                </div>
+                <div class="comment-box">
+                    <textarea placeholder="Write a comment..."></textarea>
+                    <button onclick="postComment()">Post</button>
+                </div>
+            </div>
+            <div class="post">
+                <img src="home_images/female.jpeg" alt="profile picture" id="profile4">
+                <h3>Richa Bhadauria</h3>
+                <p>Apollo Institute Of Engineering & Technology | Computer Engineering</p>
+                <p>Head Of Department Of Computer Engineering</p>
+                <img src="home_images/HODCE.jpg" alt="Cloud Gaming Expert" id="profile3">
+                <div class="btn-container">
+                    <button class="btn like-btn" onclick="toggleLike(this)">❤️ Like</button>
+                    <button class="btn comment-btn" onclick="toggleCommentBox(this)">💬 Comment</button>
+                    <button class="btn repost-btn" onclick="repost()">🔄 Repost</button>
+                    <button class="btn send-btn" onclick="sendPost()">✉️ Send</button>
+                </div>
+                <div class="comment-box">
+                    <textarea placeholder="Write a comment..."></textarea>
+                    <button onclick="postComment()">Post</button>
+                </div>
+            </div>
+        </main>
+
+        <!--Messaging Section-->
+        <aside class="messages">
+            <h3>Messaging</h3>
+
+            <input type="text" id="searchMessages" placeholder="Search messages">
+            <div class="message-list">
+                <div class="message">Ankita Mewada</div>
+                <div class="message">Kajal Chauhan</div>
+                <div class="message">Nensi Patel</div>
+                <div class="message">Nitesh Prajapati</div>
+                <div class="message">Bhoomi Rajdeep</div>
+                <div class="message">Heena Panjwani</div>
+                <div class="message">Dhruvrajsinh Raj</div>
+                <div class="message">Kavita Rathod</div>
+                <div class="message">Priynka Patani</div>
+            </div>
+        </aside>
+
+    </div>
+
+    <footer class="myfooter" style="display: flex; text-align: center; background-color: #0073e6; color: white;">
+        <aside style="width: 25%; ">
+            <div style="height: 250px; font-size: 20px;">
+                <h2>Pages</h2>
+                <ul class="navbar-links" style="font-size: 20px;">
+                    <a href="home.html" style="text-decoration: none; color: white; padding-right: 40px;">Home</a><br>
+                    <a href="network.html" id="my-network" style="text-decoration: none; color: white; padding-right: 40px;">My Network</a><br>
+                    <a href="mentor.html" id="find-mentor" style="text-decoration: none; color: white; padding-right: 40px;">Find Mentor</a><br>
+                    <a href="message.html" id="messaging-link" style="text-decoration: none; color: white; padding-right: 40px;">Messaging</a><br>
+                    <a href="notification.html" id="notification-link" style="text-decoration: none; color: white; padding-right: 40px;">Notifications</a><br>
+                    <a href="meeting.html" id="meeting-link" style="text-decoration: none; color: white; padding-right: 40px;">Join Meeting</a><br>
+                </ul>
+            </div>
+        </aside>
+
+        <main style="width: 50%;">
+            <div style="height: 160px; font-size: 20px">
+                <h2>Contact</h2>
+                <p>support@gmail.com</p>
+                <p>+91 9898989898</p>
+            </div>
+        </main>
+
+        <aside style="width: 25%;">
+            <div style="height: 160px; font-size: 20px">
+                <h2>Follow Us</h2>
+                <i class="fa-brands fa-instagram"></i>
+                <i class="fa-brands fa-x-twitter"></i>
+                <i class="fa-brands fa-square-facebook"></i>
+                <i class="fa-brands fa-linkedin"></i>
+            </div>
+        </aside>
+    </footer>
+
+
+    <script src="home.js"></script>
+</body>
+</html>

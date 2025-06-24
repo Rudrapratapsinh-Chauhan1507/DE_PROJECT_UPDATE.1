@@ -1,0 +1,142 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Mentor Profile</title>
+    <style>
+        #followBtn {
+            background-color: #0073e6;
+            color: white;
+            padding: 10px 16px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+        #followBtn:hover {
+            background-color: #005bb5;
+        }
+    </style>
+
+    <link rel="stylesheet" href="home.css">
+</head>
+<body>
+
+    <nav class="navbar">
+        <div class="logo">MentorConnect</div>
+        <ul class="nav-links">
+            <li><a href="home.html">Home</a></li>
+            <li><a href="network.html">My Network</a></li>
+            <li><a href="mentor.html">Find Mentor</a></li>
+            <li><a href="message.html">Messaging</a></li>
+            <li><a href="notification.html">Notifications</a></li>
+            <li><a href="meeting.html">Join Meeting</a></li>
+        </ul>
+    </nav>
+
+   <main>
+    <div class="profile-container">
+      <img id="profileImage" src="" alt="Mentor Image" class="profile-image"/>
+      <h2 id="mentorName"></h2>
+      <p id="mentorTitle"></p>
+      <p id="mentorLocation"></p>
+      <p id="mentorConnections"></p>
+
+      <button id="followBtn">Follow</button>
+      <button id="messageBtn" onclick="goToMessage()">Message</button>
+      <button id="bookAppointmentBtn" onclick="window.location.href='schedule.html'">Book Appointment</button>
+      <button id="moreBtn">More</button>
+
+      <section class="bio-section">
+        <h3>About</h3>
+        <p id="mentorBio"></p>
+      </section>
+    </div>
+  </main>
+
+  <footer class="myfooter" style="display: flex; text-align: center; background-color: #0073e6; color: white;">
+        <aside style="width: 25%; ">
+            <div style="height: 250px; font-size: 20px;">
+                <h2>Pages</h2>
+                <ul class="navbar-links" style="font-size: 20px;">
+                    <a href="home.html" style="text-decoration: none; color: white; padding-right: 40px;">Home</a><br>
+                    <a href="network.html" id="my-network" style="text-decoration: none; color: white; padding-right: 40px;">My Network</a><br>
+                    <a href="mentor.html" id="find-mentor" style="text-decoration: none; color: white; padding-right: 40px;">Find Mentor</a><br>
+                    <a href="message.html" id="messaging-link" style="text-decoration: none; color: white; padding-right: 40px;">Messaging</a><br>
+                    <a href="notification.html" id="notification-link" style="text-decoration: none; color: white; padding-right: 40px;">Notifications</a><br>
+                    <a href="meeting.html" id="meeting-link" style="text-decoration: none; color: white; padding-right: 40px;">Join Meeting</a><br>
+                </ul>
+            </div>
+        </aside>
+
+        <main style="width: 50%;">
+            <div style="height: 160px; font-size: 20px">
+                <h2>Contact</h2>
+                <p>support@gmail.com</p>
+                <p>+91 9898989898</p>
+            </div>
+        </main>
+
+        <aside style="width: 25%;">
+            <div style="height: 160px; font-size: 20px">
+                <h2>Follow Us</h2>
+                <i class="fa-brands fa-instagram"></i>
+                <i class="fa-brands fa-x-twitter"></i>
+                <i class="fa-brands fa-square-facebook"></i>
+                <i class="fa-brands fa-linkedin"></i>
+            </div>
+        </aside>
+    </footer>
+
+  <script>
+    function getQueryParam(param) {
+      const urlParams = new URLSearchParams(window.location.search);
+      return urlParams.get(param);
+    }
+
+    document.getElementById("mentorName").innerText = getQueryParam("name");
+    document.getElementById("mentorTitle").innerText = getQueryParam("title");
+    document.getElementById("mentorLocation").innerText = getQueryParam("location");
+    document.getElementById("mentorConnections").innerText = getQueryParam("connections");
+    document.getElementById("mentorBio").innerText = getQueryParam("bio");
+    document.getElementById("profileImage").src = getQueryParam("image");
+
+    document.getElementById("followBtn").addEventListener("click", function () {
+    const btn = this;
+    if (btn.textContent === "Follow") {
+        btn.textContent = "Following";
+        btn.style.backgroundColor = "#fff";
+        btn.style.color = "#0073e6";
+        btn.style.border = "1px solid #0073e6";
+    } else {
+        btn.textContent = "Follow";
+        btn.style.backgroundColor = "#0073e6";
+        btn.style.color = "#fff";
+        btn.style.border = "none";
+    }
+});
+
+    function getQueryParam(param) {
+        const urlParams = new URLSearchParams(window.location.search);
+        return urlParams.get(param);
+    }
+
+    // Existing query param population code...
+    document.getElementById("mentorName").innerText = getQueryParam("name");
+    document.getElementById("mentorTitle").innerText = getQueryParam("title");
+    document.getElementById("mentorLocation").innerText = getQueryParam("location");
+    document.getElementById("mentorConnections").innerText = getQueryParam("connections");
+    document.getElementById("mentorBio").innerText = getQueryParam("bio");
+    document.getElementById("profileImage").src = getQueryParam("image");
+
+    // ➕ New: Navigate to message page with name in query param
+    function goToMessage() {
+        const name = getQueryParam("name");
+        window.location.href = `message.html?user=${encodeURIComponent(name)}`;
+    }
+
+  </script>
+    
+
+</body>
+</html>

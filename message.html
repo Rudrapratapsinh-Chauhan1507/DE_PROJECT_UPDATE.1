@@ -1,0 +1,164 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Messaging | CareerMent</title>
+    <link rel="stylesheet" href="home.css">
+</head>
+<body>
+
+     <!-- Navbar -->
+    <nav class="navbar">
+        <div class="logo">MentorConnect</div>
+        <ul class="nav-links">
+            <li href="home.html" id="home-link">Home</li>
+            <li href="network.html" id="my-network">My Network</li>
+            <li href="mentor.html" id="find-mentor">Find Mentor</li>
+            <li href="message.html" id="messaging-link">Messaging</li>
+            <li href="notification.html" id="notification-link">Notifications</li>
+            <li href="meeting.html" id="meeting-link">Join Meeting</li>
+        </ul>
+    </nav>
+
+    <!-- Messaging Section -->
+    <div class="messaging-container">
+        <!-- Left Sidebar (Chat List) -->
+        <div class="chat-list">
+            <h2>Messaging</h2>
+            <input type="text" placeholder="Search messages..." class="search-bar">
+            <div class="chat-tabs">
+                <span class="active">Focused</span>
+                <span>Other</span>
+            </div>
+
+            <div class="chat-item" onclick="openChat('Prof. Ankita Mewada')">
+                <img src="message_images/Ankitama'am1.jpg" alt="User">
+                <div>
+                    <h4>Prof. Ankita Mewada</h4>
+                    <p>Hello Ma'am, Can you schedule meeting on how to crack GATE exam?</p>
+                </div>
+            </div>
+
+            <div class="chat-item" onclick="openChat('Prof. Heena Patel')">
+                <img src="message_images/Heenama'am.jpg" alt="User">
+                <div>
+                    <h4>Prof. Heena Patel</h4>
+                    <p>Thank you Ma'am for the webinar on React.js.</p>
+                </div>
+            </div>
+
+            <!-- <div class="chat-item" onclick="openChat('Pratik Prajapati')">
+                <img src="user3.jpg" alt="User">
+                <div>
+                    <h4></h4>
+                    <p>Hi Pratik, Thanks for joining.</p>
+                </div>
+            </div> -->
+
+            <div class="chat-item" onclick="openChat('Divya Patel')">
+                <img src="message_images/female.jpeg" alt="User">
+                <div>
+                    <h4>Divya Patel</h4>
+                    <p>Thank  you sir, for mentoring us in SIH Hacakthon'2025.</p>
+                </div>
+            </div>
+
+            <div class="chat-item" onclick="openChat('Nidhi Modi')">
+                <img src="message_images/female.jpeg" alt="User">
+                <div>
+                    <h4>Nidhi Modi</h4>
+                    <p>Hey Nidhi, Thanks for helping in project.</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- Chat Window -->
+        <div class="chat-window">
+            <div class="chat-header">
+                <h3 id="chatUser">Select a chat</h3>
+            </div>
+
+            <div class="chat-box" id="chatBox">
+                <p class="placeholder">Click on a conversation to start chatting.</p>
+            </div>
+
+            <div class="chat-input">
+                <input type="text" id="messageInput" placeholder="Type a message...">
+                <button onclick="sendMessage()">Send</button>
+            </div>
+        </div>
+    </div>
+
+    <footer class="myfooter" style="display: flex; text-align: center; background-color: #0073e6; color: white;">
+        <aside style="width: 25%; ">
+            <div style="height: 250px; font-size: 20px;">
+                <h2>Pages</h2>
+                <ul class="navbar-links" style="font-size: 20px;">
+                    <a href="home.html" style="text-decoration: none; color: white; padding-right: 40px;">Home</a><br>
+                    <a href="network.html" id="my-network" style="text-decoration: none; color: white; padding-right: 40px;">My Network</a><br>
+                    <a href="mentor.html" id="find-mentor" style="text-decoration: none; color: white; padding-right: 40px;">Find Mentor</a><br>
+                    <a href="message.html" id="messaging-link" style="text-decoration: none; color: white; padding-right: 40px;">Messaging</a><br>
+                    <a href="notification.html" id="notification-link" style="text-decoration: none; color: white; padding-right: 40px;">Notifications</a><br>
+                    <a href="meeting.html" id="meeting-link" style="text-decoration: none; color: white; padding-right: 40px;">Join Meeting</a><br>
+                </ul>
+            </div>
+        </aside>
+
+        <main style="width: 50%;">
+            <div style="height: 160px; font-size: 20px">
+                <h2>Contact</h2>
+                <p>support@gmail.com</p>
+                <p>+91 9898989898</p>
+            </div>
+        </main>
+
+        <aside style="width: 25%;">
+            <div style="height: 160px; font-size: 20px">
+                <h2>Follow Us</h2>
+                <i class="fa-brands fa-instagram"></i>
+                <i class="fa-brands fa-x-twitter"></i>
+                <i class="fa-brands fa-square-facebook"></i>
+                <i class="fa-brands fa-linkedin"></i>
+            </div>
+        </aside>
+    </footer>
+
+
+    <!-- <script src="message.js"></script> -->
+     <script>
+        function openChat(userName) {
+            const chatUser = document.getElementById("chatUser");
+            const chatBox = document.getElementById("chatBox");
+            chatUser.textContent = userName;
+            chatBox.innerHTML = `<p><strong>${userName}:</strong> Hello! How can I help you?</p>`;
+        }
+
+        function sendMessage() {
+            const messageInput = document.getElementById("messageInput");
+            const messageText = messageInput.value.trim();
+            const chatBox = document.getElementById("chatBox");
+            const chatUser = document.getElementById("chatUser");
+
+            if (messageText !== "") {
+                chatBox.innerHTML += `<p><strong>You:</strong> ${messageText}</p>`;
+                messageInput.value = "";
+                chatBox.scrollTop = chatBox.scrollHeight;
+            }
+        }
+
+        // Auto open chat from profile page (if query param is present)
+        window.addEventListener("DOMContentLoaded", () => {
+            const urlParams = new URLSearchParams(window.location.search);
+            const userParam = urlParams.get("user");
+            if (userParam) {
+                openChat(userParam);
+            }
+        });
+        </script>
+
+    <script src="home.js"></script>
+</body>
+</html>
+
+

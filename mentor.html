@@ -1,0 +1,186 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Find Mentor</title>
+    <link rel="stylesheet" href="home.css">
+     <style>
+        
+        .mentor-list {
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: center;
+        padding: 20px;
+        }
+
+        .mentor-card {
+        border: 1px solid #ccc;
+        border-radius: 8px;
+        width: 250px;
+        margin: 10px;
+        padding: 15px;
+        text-align: center;
+        }
+
+        .mentor-image {
+        width: 100px;
+        height: 100px;
+        border-radius: 50%;
+        object-fit: fill;
+        }
+
+        .profile-container {
+        max-width: 600px;
+        margin: 40px auto;
+        text-align: center;
+        }
+
+        .profile-image {
+        width: 150px;
+        height: 150px;
+        border-radius: 50%;
+        object-fit: cover;
+        }
+
+        .bio-section {
+        margin-top: 20px;
+        text-align: left;
+        padding: 0 20px;
+        }
+            </style>
+</head>
+<body>
+    <nav class="navbar">
+        <div class="logo">MentorConnect</div>
+        <ul class="nav-links">
+            <li><a href="home.html">Home</a></li>
+            <li><a href="network.html">My Network</a></li>
+            <li><a href="mentor.html">Find Mentor</a></li>
+            <li><a href="message.html">Messaging</a></li>
+            <li><a href="notification.html">Notifications</a></li>
+            <li><a href="meeting.html">Join Meeting</a></li>
+        </ul>
+    </nav>
+
+    <div class="search-container">
+        <input type="text" id="searchBar" placeholder="Search mentors..." onkeyup="searchMentors()">
+    </div>
+
+    <div class="filter-container">
+        <button class="filter-btn">People</button>
+        <button class="filter-btn">1st</button>
+        <button class="filter-btn">2nd</button>
+        <button class="filter-btn">3rd+</button>
+        <button class="filter-btn">Location</button>
+        <button class="filter-btn">Current Company</button>
+        <button class="filter-btn">All filters</button>
+    </div>
+
+    <div class="mentor-list" id="mentorList">
+        <!-- Mentor profiles dynamically generated -->
+    </div>
+
+    <footer class="myfooter" style="display: flex; text-align: center; background-color: #0073e6; color: white;">
+        <aside style="width: 25%; ">
+            <div style="height: 250px; font-size: 20px;">
+                <h2>Pages</h2>
+                <ul class="navbar-links" style="font-size: 20px;">
+                    <a href="home.html" style="text-decoration: none; color: white; padding-right: 40px;">Home</a><br>
+                    <a href="network.html" id="my-network" style="text-decoration: none; color: white; padding-right: 40px;">My Network</a><br>
+                    <a href="mentor.html" id="find-mentor" style="text-decoration: none; color: white; padding-right: 40px;">Find Mentor</a><br>
+                    <a href="message.html" id="messaging-link" style="text-decoration: none; color: white; padding-right: 40px;">Messaging</a><br>
+                    <a href="notification.html" id="notification-link" style="text-decoration: none; color: white; padding-right: 40px;">Notifications</a><br>
+                    <a href="meeting.html" id="meeting-link" style="text-decoration: none; color: white; padding-right: 40px;">Join Meeting</a><br>
+                </ul>
+            </div>
+        </aside>
+
+        <main style="width: 50%;">
+            <div style="height: 160px; font-size: 20px">
+                <h2>Contact</h2>
+                <p>support@gmail.com</p>
+                <p>+91 9898989898</p>
+            </div>
+        </main>
+
+        <aside style="width: 25%;">
+            <div style="height: 160px; font-size: 20px">
+                <h2>Follow Us</h2>
+                <i class="fa-brands fa-instagram"></i>
+                <i class="fa-brands fa-x-twitter"></i>
+                <i class="fa-brands fa-square-facebook"></i>
+                <i class="fa-brands fa-linkedin"></i>
+            </div>
+        </aside>
+    </footer>
+
+   <script>
+    const mentors = [
+      {
+        name: "Divya Patel",
+        title: "Software Engineer at Microsoft",
+        location: "Gujarat, India",
+        bio: "Hello there! I'm Divya, a final year Computer Engineering student at LDCE with experience in full-stack development and cloud projects.",
+        connections: "93 mutual connections",
+        image: "mentor_images/female.jpeg"
+      },
+      {
+        name: "Javed Khan",
+        title: "Expert in Automations and Solar Systems",
+        location: "Ahmedabad",
+        bio: "I'm Javed Khan, passionate about automations and renewable energy. Let's build a sustainable future together.",
+        connections: "80 mutual connections",
+        image: "mentor_images/javedsir.jpg"
+      },
+      {
+        name: "Karthik Applla",
+        title: "Software Engineer at Apple",
+        location: "New Delhi",
+        bio: "Expert in AI, ML, and Cloud Technologies. Helping students build strong careers in tech.",
+        connections: "85 mutual connections",
+        image: "mentor_images/male.jpeg"
+      }
+    ];
+
+    function displayMentors(filteredMentors) {
+      const mentorList = document.getElementById("mentorList");
+      mentorList.innerHTML = "";
+
+      filteredMentors.forEach(mentor => {
+        const params = new URLSearchParams({
+          name: mentor.name,
+          title: mentor.title,
+          location: mentor.location,
+          bio: mentor.bio,
+          connections: mentor.connections,
+          image: mentor.image
+        });
+
+        const profileUrl = `profile.html?${params.toString()}`;
+
+        const div = document.createElement("div");
+        div.classList.add("mentor-card");
+        div.innerHTML = `
+          <img src="${mentor.image}" alt="${mentor.name}" class="mentor-image" />
+          <h3>${mentor.name}</h3>
+          <p>${mentor.title}</p>
+          <p>${mentor.location}</p>
+          <button onclick="location.href='${profileUrl}'">View Profile</button>
+        `;
+        mentorList.appendChild(div);
+      });
+    }
+
+    function searchMentors() {
+      const query = document.getElementById("searchBar").value.toLowerCase();
+      const filtered = mentors.filter(m => m.name.toLowerCase().includes(query));
+      displayMentors(filtered);
+    }
+
+    displayMentors(mentors);
+  </script>
+   <script src="home.js"></script>
+</body>
+</html>
+
